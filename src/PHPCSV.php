@@ -22,24 +22,20 @@ class PHPCSV{
       $this->printError("There is nothing to write to the file.");
     }
   }
-  public function outputToFile($path="", $file_name="My CSV File.csv"){
-    if($output != ""){
+  public function outputToFile($path="", $file_name="My CSV File"){
+    if($this->output != ""){
 
-      if(is_writable($path.$file_name)){
 
-        if(!$file = fopen($path.$file_name, "a")){
+        if(!$file = fopen($path.$file_name.$this->ext, "a")){
           $this->printError("Failed to open the file ".$file_name);
         }
 
-        if(fwrite($path.$file_name, $this->$output) === FALSE){
+        if(fwrite($file, $this->output) === FALSE){
           $this->printError("Failed to write to the file ".$file_name);
         }
 
         fclose($file);
 
-      }else{
-        $this->printError("Target file is not writable.");
-      }
 
     }else{
       $this->printError("There is nothing to write to the file.");
